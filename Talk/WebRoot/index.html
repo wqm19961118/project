@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My JSP 'index.jsp' starting page</title>
+	<meta charset="utf-8"/>
+	<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+  </head>
+  <style>
+  	.classStyle{
+  		color:red;
+  	}
+  </style>
+  <body>
+    <div id="app">
+    	<ul>
+    		<li v-for="t in list">{{t.text}}-{{tList}}</li>
+    	</ul>
+    	
+    	<div v-html="html"></div>
+    	<h2 :class="testClass" :title="title">这是测试绑定class属性</h2>
+    	
+    	<p>大写转小写{{message.toLowerCase()}}</p>
+    	
+    	<h3>反转测试：{{name|myfilter}}</h3>
+    	<input type="button" value="事件按钮" v-on:click="test"/>
+    </div>
+    <div id="attr">
+    	<p>{{b}}</p>
+    	<input type="text" v-model="text"/>
+    </div>
+  </body>
+  <script type="text/javascript">
+	var app=new Vue({
+			el:"#app",
+			data:{
+				name:'Tony',
+				message:'ABC',
+				title:'title',
+				testClass:'classStyle',
+				html:'<h1>这是H1标签</h1>',
+				tList:'test',
+				list:[
+					{text:'123'},
+					{text:'456'}
+				]
+			},
+			//过滤器
+			filters:{
+				myfilter(value){
+					return value.split('').reverse().join('');
+				}
+			},
+			methods:{
+				test:function(){
+					alert("你好");
+				}
+			} 
+		});
+	var attr=new Vue({
+		el:'#attr',
+		data:{
+			a:0
+		},
+		//计算属性
+		computed:{
+			b:function(){
+				return parseInt(this.a)+1;
+			}
+		},
+		//观察者
+		watch:{
+			text:function(curVal, oldVal){
+				this.a=curVal;
+			}
+		}
+	});
+	attr.b=10;
+	</script>
+</html>

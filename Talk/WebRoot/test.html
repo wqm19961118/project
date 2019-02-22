@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" >
+	var path;
+	function init(){
+		var url='http://music.163.com/song/media/outer/url';
+		var param={'id':304661};
+		$.ajax({
+            type:'get',
+            url: url,
+            data: {'id':'304661'},
+            dataType:'jsonp',
+   			jsonpCallback:"success_jsonp",    
+   			timeout:3000,    
+            success:function(result){
+            console.log(result.curl);
+            	$("#test").attr("src",result.curl);
+            }
+        });
+	}
+	$(function(){
+		init();
+	})
+</script>
+</head>
+<body>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2357775560&auto=1&height=430"></iframe>
+</body>
+</html>
